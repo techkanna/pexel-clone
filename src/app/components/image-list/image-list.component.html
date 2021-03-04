@@ -1,1 +1,10 @@
-<p>image-list works!</p>
+<section class="img-list">
+  <div class="custom-container">
+    <h2 class="section-header">{{ searchTitle }} Images</h2>
+
+    <ng-container *ngIf="errorMessage">{{ errorMessage }}</ng-container>
+    <div class="imgs">
+      <app-img-col *ngFor="let col of colums" [col]="col"></app-img-col>
+    </div>
+  </div>
+</section>

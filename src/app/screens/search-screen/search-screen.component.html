@@ -1,1 +1,13 @@
-<app-header></app-header>
+<ng-container>
+  <app-header
+    (handleSearchValueChange)="handleSearchValueChange($event)"
+  ></app-header>
+  <app-filters></app-filters>
+  <app-image-list
+    [colOneImages]="colOneImages"
+    [colTwoImages]="colTwoImages"
+    [colThreeImages]="colThreeImages"
+    [errorMessage]="errorMessage"
+    [searchTitle]="searchTitle"
+  ></app-image-list>
+</ng-container>

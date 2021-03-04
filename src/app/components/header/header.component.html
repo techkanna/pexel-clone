@@ -1,9 +1,16 @@
-<div id="app-header">
+<header id="app-header">
   <div class="logo-search-wrapper">
-    <h1>Pexels</h1>
+    <h1 class="logo">Pexels</h1>
 
     <div class="custom-input-field">
-      <input type="text" />
+      <form (submit)="handleSubmit($event)">
+        <input
+          type="text"
+          [value]="searchInput"
+          (change)="handleChange($event.target.value)"
+          placeholder="search here..."
+        />
+      </form>
       <span class="img">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -18,4 +25,4 @@
       </span>
     </div>
   </div>
-</div>
+</header>
