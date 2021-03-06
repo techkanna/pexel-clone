@@ -1,0 +1,8 @@
+<button
+  [ngClass]="{
+    'active-btn': type == 'All Orientations' || type == 'All Sizes'
+  }"
+  (click)="handleClick(type)"
+>
+  {{ type }}
+</button>

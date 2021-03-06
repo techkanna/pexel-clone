@@ -5,6 +5,9 @@
   <app-filters
     (getVideos)="getVideos()"
     (getPhotos)="getPhotos()"
+    (getFilterOptions)="getFilterOptions($event)"
+    [resultType]="searchTitle.type"
+    [totalCounts]="totalCounts"
   ></app-filters>
 
   <container-element [ngSwitch]="searchTitle.type">

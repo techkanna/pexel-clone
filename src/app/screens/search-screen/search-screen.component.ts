@@ -21,6 +21,11 @@ export class SearchScreenComponent implements OnInit {
     type: 'Photos',
   };
 
+  totalCounts: any = {
+    photos: '19.2k',
+    videos: '4.93k',
+  };
+
   nextPageURL: string;
   videosCurrentPageNum: number = 1;
   colums_pics = [this.colOneImages, this.colTwoImages, this.colThreeImages];
@@ -159,8 +164,10 @@ export class SearchScreenComponent implements OnInit {
   }
 
   getVideos(isOverWrite: Boolean = true) {
-    this.ss.getVideos(this.searchTitle.value).subscribe(
+    this.ss.getVideos({ query: this.searchTitle.value }).subscribe(
       (data: any) => {
+        this.totalCounts.videos = this._getCountStr(data.total_results);
+
         this.spreadVideosToColumn(data.videos, isOverWrite);
         this.searchTitle.type = 'Videos';
 
@@ -173,8 +180,9 @@ export class SearchScreenComponent implements OnInit {
   }
 
   getPhotos(isOverWrite: Boolean = true) {
-    this.ss.getPhotos(this.searchTitle.value).subscribe(
+    this.ss.getPhotos({ query: this.searchTitle.value }).subscribe(
       (data: any) => {
+        this.totalCounts.photos = this._getCountStr(data.total_results);
         this.spreadImagesToColumn(data.photos, isOverWrite);
         this.searchTitle.type = 'Photos';
         this.nextPageURL = data.next_page;
@@ -191,9 +199,87 @@ export class SearchScreenComponent implements OnInit {
     return `https://api.pexels.com/videos/search/?page=${this.videosCurrentPageNum}&per_page=30&query=${this.searchTitle.value}`;
   }
 
+  getFilterOptions(e: any) {
+    let opts = {
+      query: this.searchTitle.value,
+      orientation: e.orientation,
+      size: e.size,
+      color: e.color,
+    };
+
+    switch (opts.size) {
+      case 'Large 24MP':
+        opts.size = 'large';
+        break;
+      case 'Medium 12MP':
+        opts.size = 'medium';
+        break;
+      case 'Small 4MP ':
+        opts.size = 'small';
+        break;
+
+      default:
+        break;
+    }
+
+    switch (opts.orientation) {
+      case 'Horizontal':
+        opts.orientation = 'landscape';
+        break;
+      case 'Vertical':
+        opts.orientation = 'portrait';
+        break;
+      case 'Square':
+        opts.orientation = 'square';
+        break;
+
+      default:
+        break;
+    }
+
+    switch (this.searchTitle.type) {
+      case 'Photos':
+        this.ss.getPhotos(opts).subscribe(
+          (data: any) => {
+            this.spreadImagesToColumn(data.photos, true);
+            this.searchTitle.type = 'Photos';
+            this.nextPageURL = data.next_page;
+            // console.log({ opts });
+          },
+          (err) => {
+            console.error(err);
+            this.errorMessage = 'sorry something went wrong';
+          }
+        );
+
+        break;
+      case 'Videos':
+        this.ss.getVideos(opts).subscribe(
+          (data: any) => {
+            this.spreadVideosToColumn(data.videos, true);
+            this.searchTitle.type = 'Videos';
+
+            this.nextPageURL = this._getNextPageURL();
+          },
+          (err) => {
+            console.error(err);
+          }
+        );
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  _getCountStr(num: number) {
+    return num < 1000 ? num + '' : num / 1000 + 'k';
+  }
+
   constructor(private ss: SearchService) {}
 
   ngOnInit(): void {
     this.getPhotos();
+    // this.getVideos();
   }
 }

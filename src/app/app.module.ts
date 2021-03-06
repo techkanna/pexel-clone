@@ -11,6 +11,8 @@ import { ImageListComponent } from './components/image-list/image-list.component
 import { ImgColComponent } from './components/image-list/img-col/img-col.component';
 import { VideoListComponent } from './components/video-list/video-list.component';
 import { VidColComponent } from './components/video-list/vid-col/vid-col.component';
+import { ColorBtnComponent } from './components/filters/color-btn/color-btn.component';
+import { DropdowBtnComponent } from './components/filters/dropdow-btn/dropdow-btn.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { VidColComponent } from './components/video-list/vid-col/vid-col.compone
     ImgColComponent,
     VideoListComponent,
     VidColComponent,
+    ColorBtnComponent,
+    DropdowBtnComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

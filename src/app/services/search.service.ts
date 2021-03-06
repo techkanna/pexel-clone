@@ -23,9 +23,15 @@ export class SearchService {
     );
   }
 
-  getPhotos(query: any = 'mountains', perPage: number = 30) {
+  getPhotos(opts: any) {
+    const { query, perPage, orientation, size, color } = opts;
+
     return this.http.get(
-      `${this.baseUrlPhoto}/search?query=${query}&per_page=${perPage}`,
+      `${this.baseUrlPhoto}/search?query=${query}&per_page=${
+        perPage ? perPage : 30
+      }&orientation=${orientation ? orientation : ''}&size=${
+        size ? size : ''
+      }&color=${color ? color : ''}`,
       httpOptions
     );
   }
@@ -34,9 +40,13 @@ export class SearchService {
     return this.http.get(nextPageUrl, httpOptions);
   }
 
-  getVideos(query: any = 'mountains', perPage: number = 30) {
+  getVideos(opts: any) {
+    const { query, perPage, orientation, size } = opts;
+
     return this.http.get(
-      `${this.baseUrlVideo}/search?query=${query}&per_page=${perPage}`,
+      `${this.baseUrlVideo}/search?query=${query}&per_page=${
+        perPage ? perPage : 30
+      }&orientation=${orientation ? orientation : ''}&size=${size ? size : ''}`,
       httpOptions
     );
   }
