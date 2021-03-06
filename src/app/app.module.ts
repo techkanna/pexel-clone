@@ -9,6 +9,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { ImageListComponent } from './components/image-list/image-list.component';
 import { ImgColComponent } from './components/image-list/img-col/img-col.component';
+import { VideoListComponent } from './components/video-list/video-list.component';
+import { VidColComponent } from './components/video-list/vid-col/vid-col.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { ImgColComponent } from './components/image-list/img-col/img-col.compone
     FiltersComponent,
     ImageListComponent,
     ImgColComponent,
+    VideoListComponent,
+    VidColComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

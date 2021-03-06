@@ -2,12 +2,29 @@
   <app-header
     (handleSearchValueChange)="handleSearchValueChange($event)"
   ></app-header>
-  <app-filters></app-filters>
-  <app-image-list
-    [colOneImages]="colOneImages"
-    [colTwoImages]="colTwoImages"
-    [colThreeImages]="colThreeImages"
-    [errorMessage]="errorMessage"
-    [searchTitle]="searchTitle"
-  ></app-image-list>
+  <app-filters
+    (getVideos)="getVideos()"
+    (getPhotos)="getPhotos()"
+  ></app-filters>
+
+  <container-element [ngSwitch]="searchTitle.type">
+    <app-image-list
+      *ngSwitchCase="'Photos'"
+      [colums]="colums_pics"
+      [errorMessage]="errorMessage"
+      [searchTitle]="searchTitle"
+    ></app-image-list>
+    <app-video-list
+      *ngSwitchCase="'Videos'"
+      [colums]="colums_Videos"
+      [errorMessage]="errorMessage"
+      [searchTitle]="searchTitle"
+    ></app-video-list>
+    <!-- <some-other-element *ngSwitchCase="match_expression_3">...</some-other-element> -->
+    <ng-container *ngSwitchDefault>Loading...</ng-container>
+  </container-element>
+
+  <div class="load-more-wrapper">
+    <button class="btn" (click)="loadMore()">Load More</button>
+  </div>
 </ng-container>

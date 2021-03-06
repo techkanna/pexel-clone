@@ -1,7 +1,10 @@
 <section class="filters-section">
   <div class="custom-container">
     <div class="left-side">
-      <button class="btn active">
+      <button
+        [ngClass]="{ btn: true, active: isActive.p }"
+        (click)="handlePhotosClick($event)"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -16,7 +19,10 @@
 
         <span class="counts">19.2K</span>
       </button>
-      <button class="btn">
+      <button
+        [ngClass]="{ btn: true, active: isActive.v }"
+        (click)="handleVideosClick($event)"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -31,7 +37,7 @@
 
         <span class="counts">4.93K</span>
       </button>
-      <button class="btn">
+      <button [ngClass]="{ btn: true, active: isActive.u }">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

@@ -12,6 +12,7 @@ const httpOptions = {
 })
 export class SearchService {
   baseUrlPhoto = 'https://api.pexels.com/v1';
+  baseUrlVideo = 'https://api.pexels.com/videos';
 
   constructor(private http: HttpClient) {}
 
@@ -22,9 +23,20 @@ export class SearchService {
     );
   }
 
-  getPhotos(query: any = 'nature', perPage: number = 30) {
+  getPhotos(query: any = 'mountains', perPage: number = 30) {
     return this.http.get(
       `${this.baseUrlPhoto}/search?query=${query}&per_page=${perPage}`,
+      httpOptions
+    );
+  }
+
+  getNextPageData(nextPageUrl: string) {
+    return this.http.get(nextPageUrl, httpOptions);
+  }
+
+  getVideos(query: any = 'mountains', perPage: number = 30) {
+    return this.http.get(
+      `${this.baseUrlVideo}/search?query=${query}&per_page=${perPage}`,
       httpOptions
     );
   }

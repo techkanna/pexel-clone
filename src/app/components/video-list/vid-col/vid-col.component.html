@@ -1,0 +1,13 @@
+<div class="img-col">
+  <ng-container *ngFor="let vid of col">
+    <!-- width="{{ vid.video_files[0].width }}"
+    height="{{ vid.video_files[0].height }}" -->
+    <video controls>
+      <source
+        src="{{ vid.video_files[0].link }}"
+        type="{{ vid.video_files[0].file_type }}"
+      />
+      Your browser does not support the video tag.
+    </video>
+  </ng-container>
+</div>

@@ -1,0 +1,17 @@
+.img-list {
+  .section-header {
+    margin: 3rem 0;
+    text-align: center;
+  }
+
+  .imgs {
+    display: flex;
+
+    app-vid-col {
+      flex: 1;
+      &:not(:last-of-type) {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
